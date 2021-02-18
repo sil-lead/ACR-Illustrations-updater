@@ -27,7 +27,7 @@ or navigate to the folder and type:
 ```
 set PATH="%PATH%;."
 ```
-(Note: The above commands will work only for the current session: if you close the CMD window and open a new CMD window, you will need to set the PATH again. There are many tutorials online about how to permanently the PATH; here is a good search to use for them: (https://www.google.com/search?q=set+windows+path+-java).)
+(**Note:** The above commands will work only for the current session: if you close the CMD window and open a new CMD window, you will need to set the PATH again. There are many tutorials online about how to permanently the PATH; here is a good search to use for them: (https://www.google.com/search?q=set+windows+path+-java).)
 
 # 3) Set up programs on your machine
 
@@ -48,8 +48,7 @@ You should see something like
 ```
 11.72
 ```
-
-(Note: you can put the `exiftool.exe` file anywhere in your filesystem -- it just needs to be in your PATH variable.)
+(**Note:** you can put the `exiftool.exe` file anywhere in your filesystem -- it just needs to be in your PATH variable.)
 
 ## 3b. ImageMagick
 
@@ -94,13 +93,13 @@ test-process-images.pl
 ```
 That should create a `/test-output` folder and a `/test-output/test-processed-images` subfolder, with two png image files.
 
-Now make an installer. Double click the `test-installer.iss` file. **InnoSetup** should run. Click `Build:Compile`. That should create `/test-output/Shapes Collection 1.0.exe`. Now run that program. When it is done, look in `%programdata%\SIL\ImageCollections\` (which is probably `C:\ProgramData\SIL\ImageCollections` on your computer). You should see a folder called `test-Shapes`.
+Now make an installer. Double click the `test-installer.iss` file. **InnoSetup** should run. Click `Build:Compile`. That should create `/test-output/Shapes Collection 1.0.exe`. Now run that program. When it is done, look in `%programdata%\SIL\ImageCollections\` (which is probably `C:\ProgramData\SIL\ImageCollections` on your computer). You should see a folder called `Shapes`.
 
-(After you have verified that the `test-Shapes` folder is there, you can run the `test-Shapes\uninstall.exe` program. This will remove the `test-Shapes` image gallery from your computer.)
+(After you have verified that the `Shapes` folder is there, you can run the `Shapes\uninstall.exe` program. This will remove the `Shapes` image gallery from your computer.)
 
 # 5) Set up your image files
 
-Copy the images you want to add to the _ACR Illustrations_ into the `/ACR-images` folder. `ACR-images` has a set of subfolders to match the ACR Illustrations categories (Actions, Animals, Food, FromBooks, Miscellaneous, Objects, People). If you want to add an image to an existing _ACR Illustrations_ sub-folder, put it in the appropriate sub-folder (for instance, _people/new-image.png_).
+Copy the images you want to add to the _ACR Illustrations_ into the `/ACR-images` folder. `ACR-images` has a set of subfolders to match the ACR Illustrations categories (Actions, Animals, Food, FromBooks, Miscellaneous, Objects, People). If you want to add an image to an existing _ACR Illustrations_ sub-folder, put it in the appropriate sub-folder (for instance, _People/new-image.png_).
 
 **IMPORTANT:** Be sure the names of your new image files are not the same as the names of any existing _ACR Illustrations_ images.
 
