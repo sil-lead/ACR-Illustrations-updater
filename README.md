@@ -27,7 +27,7 @@ or navigate to the folder and type:
 ```
 set PATH="%PATH%;."
 ```
-(**Note:** The above commands will work only for the current session: if you close the CMD window and open a new CMD window, you will need to set the PATH again. There are many tutorials online about how to permanently the PATH; here is a good search to use for them: (https://www.google.com/search?q=set+windows+path+-java).)
+(**Note:** The above commands will work only for the current session: if you close the CMD window and open a new CMD window, you will need to set the PATH again. There are many tutorials online about how to permanently the PATH; here is a good search to use for them: https://www.google.com/search?q=set+windows+path+-java.)
 
 # 3) Set up programs on your machine
 
@@ -54,7 +54,7 @@ You should see something like
 
 **ImageMagick** can be used to convert your images to PNG. If your collection contains jpeg photographs or very complicated color drawings that include shading and such, then this is not what you want. Please contact us.
 
-Get it at (http://www.imagemagick.org/script/download.php). Get the first choice under "Windows Binary Release". Run the installer and verify that if you open a new CMD window, this command works:
+Get it at http://www.imagemagick.org/script/download.php. Get the first choice under "Windows Binary Release". Run the installer and verify that if you open a new CMD window, this command works:
 ```
 magick --version
 ```
@@ -65,15 +65,15 @@ Copyright: Copyright (C) 1999-2015 ImageMagick Studio LLC
 ```
 ## 3c. PNGOut.exe
 
-**PNGOut** is used to compress PNG files. Get it here: (http://advsys.net/ken/utils.htm). Like exiftool, it lacks an installer. So put the file named `pngout.exe` in this folder, alongside the file named `process-images.bat` (or anywhere else on your Windows PATH). Type following command in a CMD window while cd'd into this folder:
+**PNGOut** is used to compress PNG files. Get it here: http://advsys.net/ken/utils.htm. Like exiftool, it lacks an installer. So put the file named `pngout.exe` in this folder, alongside the file named `process-images.bat` (or anywhere else on your Windows PATH). Type following command in a CMD window while cd'd into this folder:
 ```
 pngout
 ```
 You should see a bunch of documentation on how to use pngout, which you can ignore.
 
-## 3d. Strawberry Perl
+## 3d. Perl
 
-**Perl** is used to process the images and help prepare the index file. Get it here: (https://strawberryperl.com/). Be sure to get the MSI installer. Download the installer and run it. To verify that it is properly installed, type the following command in a CMD window:
+**Perl** is used to process the images and help prepare the index file. Get it here: https://strawberryperl.com/. Be sure to get the MSI installer. Download the installer and run it. To verify that it is properly installed, type the following command in a CMD window:
 ```
 perl -version
 ```
