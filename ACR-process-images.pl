@@ -1,5 +1,12 @@
 #!/usr/bin/perl
 
+# ACR-process-images.#!/usr/bin/env perl
+# Author: Fraser Bennett fraser_bennett@sil-lead.org
+# Date: 18-Feb-2021
+# Copyright (c) SIL LEAD, Inc.
+# Licensed under MIT License
+# based on https://github.com/sillsdev/image-collection-starter
+
 unless ($^O eq "MSWin32") {
 	die "This script is for use on Microsoft Windows\r\n";
 }
@@ -10,19 +17,20 @@ unless ($^O eq "MSWin32") {
 
 #  ----------- BEGIN LINES THAT YOU NORMALY CUSTOMIZE FOR EACH COLLECTION -------------------------
 
-$COPYRIGHT = "Copyright (c) 2021 My Organization";
-$LICENSE = "http://creativecommons.org/licenses/by-sa/4.0/";
-$ATTRIBUTIONURL = "http://myOrganization.org";
-$COLLECTIONURI = "http://myOrganization.org/aboutShapesImages";
-$COLLECTIONNAME = "Shapes Images";
+$COPYRIGHT = "Copyright (c) 2020 The Ministry of Education of the Government of the Islamic Republic of Afghanistan";
+$LICENSE = "All rights reserved";
+$ATTRIBUTIONURL = "";
+$COLLECTIONURI = "";
+$COLLECTIONNAME = "Afghan Children Read Illustrations";
 #  The following line is optional; you might like to prefix all images with something indicating the collection it came from.
 #  If not, set to just PREFIX=
-$PREFIX = "shape_";
+$PREFIX = "";
 #  The following line is optional, if you want to watermark each image. Otherwise, set to ""
 #  Note that the approach used below is pretty ugly, and we don't use it for Art Of Reading.
 #  It would not be hard to instead have a the watermark done as a semi-transparent image instead of this black text.
 #  But either way, it's going to expand/shrink with the image, so it is not so practical.
-$WATERMARK = "Shapes.CC-BY-SA";
+$WATERMARK = "";
+
 #  ----------- END OF LINES THAT YOU NORMALY CUSTOMIZE FOR EACH COLLECTION -------------------------
 
 $source = "images";
@@ -37,6 +45,13 @@ $dest = 'output/processed-images';
 #  copy the source images to /processed-images
 `xcopy $source $dest /S /Q /I` ;
 # `cp -R $source $dest`;
+
+#remove placeholder .md files in ACR-images
+my $md = 'Put new * here.md';
+my @md = `dir /b /s $dest $md`;
+for (@md) {
+	`del $_;`
+}
 
 my @images = `dir /b /s $dest *.jpg *.png *.tif *.bmp`;
 for (@images) {
