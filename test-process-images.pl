@@ -33,8 +33,8 @@ $WATERMARK = "Shapes.CC-BY-SA";
 
 #  ----------- END OF LINES THAT YOU NORMALY CUSTOMIZE FOR EACH COLLECTION -------------------------
 
-$source = "images";
-$dest = 'output/processed-images';
+$source = "test-images";
+$dest = 'test-output/processed-images';
 # It is important to include the trailing slash / so that xcopy (below) will
 # know the destination is a directory
 
