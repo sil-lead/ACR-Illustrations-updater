@@ -179,3 +179,7 @@ Inside, there are two items you need to know about: the `index.txt` file and the
 
 * `index.txt` stores the tags or search terms that you can use to search for an image.
 * `images` folder stores all the images in the image collection.
+
+# If you need help...
+
+Contact [SIL LEAD](https://www.sil-lead.org). 

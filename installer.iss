@@ -27,7 +27,7 @@ DisableDirPage=yes
 Name: "en"; MessagesFile: "compiler:Default.isl";
 
 [Files]
-Source: "ACR-output\processed-images\*"; DestDir: "{app}\images"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "output\processed-images\*"; DestDir: "{app}\images"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "index.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "images-license.txt"; DestDir: "{app}"; Flags: ignoreversion
 

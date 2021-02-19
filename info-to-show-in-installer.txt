@@ -1,0 +1,8 @@
+This package contains a collection of illustrations and images created through the Afghan Children Read project. This package is intended for use with applications which support it, namely Bloom and WeSay. Bloom and WeSay are free, open-source applications from SIL.
+
+Once this package is installed, Bloom and WeSay will automatically find and use it.
+
+A special feature of this package is that the image files themselves contain embedded information on their source and licensing. This will allow the programs to help you make sure you are using the images legally.
+
+http://bloomlibrary.org
+http://software.sil.org/wesay
