@@ -12,7 +12,7 @@ You should be comfortable installing software and using the Windows **CMD** comm
 
 Note: If you want to create an installer for a new image collection, see [sillsdev/image-collection-starter](https://github.com/sillsdev/image-collection-starter).
 
-# 1) Clone this repository into your own github account.
+# 1) Clone this repository
 
 Click the green **Copy** button and select **Download ZIP**. Then unzip the files that have been downloaded.
 
