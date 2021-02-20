@@ -107,7 +107,7 @@ Copy the images you want to add to the _ACR Illustrations_ into the `/ACR-images
 
 We need an automated process that will take each image in the `ACR-images/` directory, get it all ready, and put it in the `/ACR-output/processed-images` directory. This is what the `ACR-process-images.pl` does. Run it by typing:
 ```
-perl ACR-process-images.pl
+perl process-images.pl
 ```
 For each image in `ACR-images/`, `ACR-process-images.pl` file:
 * makes a PNG out of it in `/ACR-output/processed-images` using ImageMagick (but not if the image is a jpg file, which should not be converted to PNG)
@@ -149,7 +149,7 @@ Here are some things to be careful about:
 
 Run the following command:
 ```
-perl ACR-clean-index.pl
+perl clean-index.pl
 ```
 This script fetches the index from the _Afghan Children Reading_ collection that is already installed on the computer and adds the contents of your new `index.txt` to it.
 
