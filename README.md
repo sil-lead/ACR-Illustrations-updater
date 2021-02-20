@@ -1,10 +1,11 @@
 This repository is a starting point for updating the _Afghan Children Reading Illustrations_ image collection. It includes:
 
 * a sample collection with a multilingual index
-* a windows batch file that
+* a Perl script file that
     * converts all images to highly compressed png's
     * embeds intellectual property information in each image
     * optionally adds a prefix to each image file
+* a Perl script that imports existing index entries and adds new index entries to it
 * an installer setup
 
 You should be comfortable installing software and using the Windows **CMD** command prompt.
