@@ -33,9 +33,13 @@ $WATERMARK = "Shapes.CC-BY-SA";
 
 #  ----------- END OF LINES THAT YOU NORMALY CUSTOMIZE FOR EACH COLLECTION -------------------------
 
-$source = "test-images";
-$dest = 'test-output/processed-images';
-# It is important to include the trailing slash / so that xcopy (below) will
+$source = "test-images/";
+$dest = 'test-output/processed-images/';
+if ($^O eq "MSWin32") {
+	$source =~ s/\//\\/g;
+	$dest =~ s/\//\\/g;
+}
+# Convert forward to back slashes so that rmdir and xcopy will
 # know the destination is a directory
 
 #  Clear out existing /processed-images
@@ -46,35 +50,41 @@ $dest = 'test-output/processed-images';
 `xcopy $source $dest /S /Q /I` ;
 # `cp -R $source $dest`;
 
-my @images = `dir /b /s $dest *.jpg *.png *.tif *.bmp`;
+my @images = `dir /b /s /a:-d $dest\*.jpg $dest\*.png $dest\*.tif $dest\*.bmp`;
 for (@images) {
     chomp;
     my $src = $_;
-		my $result = $_;
-		unless ($src =~ /\.jpg$/i) {
-			# whatever the filename was, the new file name is that with the prefix
-			# (if any) plus the .png extension
-			my $result = $src =~ s/jpg$/png/i;
-			# if we've made a copy with a different name,
-			# remove the original from /process-images
-			`del $src`;
+	my $result = $src;
 
-			# convert each file that looks like an image to PNG unless it's a jpg,
-			# because you probably don't want to convert those to PNG
-			`magick convert $src $result`;
+	if ($PREFIX) {
+		$result =~ s/^(.+\\)(.+)/$1$PREFIX$2/;
+	}
 
-			# and compress the resulting PNG file
-			print "Compresssing $result\r\n";
-			`pngout /y /v /s1 /kEXt,zTXt $result`;
-		}
+	# whatever the filename was, the new file name is that with the prefix
+	# (if any) plus the .png extension
+	$result =~ s/(tif|bmp|png)$/png/i;
 
-		# use imagemagick convert to add a watermark
-		if ($WATERMARK) (
-			print "Adding a watermark to $result...\n";
-			`magick convert -pointsize 20 -gravity SouthWest -annotate +10+10 $WATERMARK $result $result`;
-		)
+	# convert each file that looks like an image to PNG unless it's a jpg,
+	# because you probably don't want to convert those to PNG
+	`magick convert "$src" "$result"`;
 
-		# add metadata
+	# if we've made a copy with a different name,
+	# remove the original from /process-images
+	unless ($result eq $src) {
+		`del "$src"`;
+	}
+	
+	# and compress the resulting PNG file
+	print "Compresssing $result\r\n";
+	`pngout /y /v /s1 /kEXt,zTXt "$result"`;
+
+	# use imagemagick convert to add a watermark
+	if ($WATERMARK) {
+		print "Adding a watermark to $result...\n";
+		`magick convert -pointsize 20 -gravity SouthWest -annotate +10+10 $WATERMARK "$result" "$result"`;
+	}
+
+	# add metadata
     print "Embedding metadata in $result...\n";
-		`exiftool -E -q -overwrite_original_in_place -copyright="$COPYRIGHT" -XMP-cc:License="$LICENSE" -XMP:Marked="True" -XMP:ReuseAllowed="true" -XMP:AttributionUrl="$ATTRIBUTIONURL" -XMP:CollectionURI="$COLLECTIONURI" -XMP:CollectionName="$COLLECTIONNAME" $src`;
+	`exiftool -E -q -overwrite_original_in_place -copyright="$COPYRIGHT" -XMP-cc:License="$LICENSE" -XMP:Marked="True" -XMP:ReuseAllowed="true" -XMP:AttributionUrl="$ATTRIBUTIONURL" -XMP:CollectionURI="$COLLECTIONURI" -XMP:CollectionName="$COLLECTIONNAME" "$result"`;
 }
