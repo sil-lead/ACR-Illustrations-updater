@@ -33,8 +33,8 @@ $WATERMARK = "";
 
 #  ----------- END OF LINES THAT YOU NORMALY CUSTOMIZE FOR EACH COLLECTION -------------------------
 
-$source = "images";
-$dest = 'output/processed-images';
+$source = "images/";
+$dest = 'output/processed-images/';
 if ($^O eq "MSWin32") {
 	$source =~ s/\//\\/g;
 	$dest =~ s/\//\\/g;
@@ -51,38 +51,38 @@ if ($^O eq "MSWin32") {
 # `cp -R $source $dest`;
 
 #remove placeholder .md files in ACR-images
-my $md = 'Put new * here.md';
-my @md = `dir /b /s "$dest" "$md"`;
+my @md = `dir /b /s /a:-d $dest\*.md`;
+chomp @md;
 for (@md) {
 	`del "$_";`
 }
 
 my @images = `dir /b /s /a:-d $dest\*.jpg $dest\*.png $dest\*.tif $dest\*.bmp`;
+chomp @images;
 for (@images) {
-    chomp;
     my $src = $_;
 	my $result = $src;
 
-	if ($PREFIX) {
-		$result = $prefix . $result;
+	$result = $prefix . $result;
+
+	# whatever the filename was, the new file name is that with the prefix
+	# (if any) plus the .png extension
+	($result = $src) =~ s/(tif|bmp|png)$/png/i;
+
+	# convert each file that looks like an image to PNG unless it's a jpg,
+	# because you probably don't want to convert those to PNG
+	unless ($src =~ /png$/i or $src =~ /jpg$/i) {
+		`magick convert "$src" "$result"`;
 	}
 
-	unless ($src =~ /jpg$/i) {
-		# whatever the filename was, the new file name is that with the prefix
-		# (if any) plus the .png extension
-		($result = $src) =~ s/(tif|bmp|png)$/png/i;
-
-		# convert each file that looks like an image to PNG unless it's a jpg,
-		# because you probably don't want to convert those to PNG
-		`magick convert "$src" "$result"`;
-
-		# if we've made a copy with a different name,
-		# remove the original from /process-images
-		unless ($result eq $src) {
-			`del "$src"`;
-		}
-		
-		# and compress the resulting PNG file
+	# if we've made a copy with a different name,
+	# remove the original from /process-images
+	unless ($result eq $src) {
+		`del "$src"`;
+	}
+	
+	# and compress the resulting PNG file
+	if ($result =~ /png$/i) {
 		print "Compresssing $result\r\n";
 		`pngout /y /v /s1 /kEXt,zTXt "$result"`;
 	}

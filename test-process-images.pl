@@ -56,9 +56,7 @@ for (@images) {
     my $src = $_;
 	my $result = $src;
 
-	if ($PREFIX) {
-		$result =~ s/^(.+\\)(.+)/$1$PREFIX$2/;
-	}
+	$result =~ s/^(.+\\)(.+)/$1$PREFIX$2/;
 
 	# whatever the filename was, the new file name is that with the prefix
 	# (if any) plus the .png extension
@@ -75,8 +73,10 @@ for (@images) {
 	}
 	
 	# and compress the resulting PNG file
-	print "Compresssing $result\r\n";
-	`pngout /y /v /s1 /kEXt,zTXt "$result"`;
+	if ($result =~ /png$/i) {
+		print "Compresssing $result\r\n";
+		`pngout /y /v /s1 /kEXt,zTXt "$result"`;
+	}
 
 	# use imagemagick convert to add a watermark
 	if ($WATERMARK) {

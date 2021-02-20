@@ -9,6 +9,7 @@ open (my $basefh, "<", $baseindexloc) || die $0;
 my @index;
 while (<$basefh>) {
 	chomp;
+	s/\r//; # remove trailing <CR>
 	push @index, $_;
 };
 close $basefh;
@@ -17,22 +18,24 @@ close $basefh;
 open (my $fh, "<", "index.txt");
 while (<$fh>) {
 	chomp;
-	unless (/^filename/) {
+	s/\r//;
+	unless (/^filename/ or /^$/) {
 		push @index, $_;
 	}
 }
 close $fh;
 
-my @filtered;
-push @filtered, shift (@index);
-push @filtered, uniq (@index);
+my @jndex;
+push @jndex, shift (@index);
+my @filtered = uniq(@index);
+push @jndex, @filtered;
 open (my $fh, ">", "index.txt");
-for my $i (@filtered) {
+for my $i (@jndex) {
 	print $fh "$i\n";
 }
 close $fh;
 
 sub uniq {
-	my %seen;
-	grep !$seen{$_}++, @_;
+	my %seen = ();
+	my @unique = grep { ! $seen{ $_ }++ } @_;
 }

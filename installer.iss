@@ -6,17 +6,17 @@
 AppId={{aa6f9522-23cd-4b99-b67f-4c8aa55cb347}
 AppName=Afghan Children Reading Illustrations
 ; You can change the AppVersion to reflect updates to the ACR Illustrations
-AppVersion=1.0
+AppVersion=1.1
 AppPublisher=Afghan Children Read/Ministry of Education of the Government of the Islamic Republic of Afghanistan
 AppPublisherURL=https://moe.gov.af/
 AppSupportURL=
 AppUpdatesURL=
 DefaultDirName="{commonappdata}\SIL\ImageCollections\Afghan Children Read"
 DefaultGroupName=
-OutputBaseFilename=Install ACR Illustrations
+OutputBaseFilename=Install ACR Illustrations-{#SetupSetting("AppVersion")}
 DisableProgramGroupPage=yes
-LicenseFile=ACR-images-license.txt
-InfoBeforeFile=ACR-info-to-show-in-installer.txt
+LicenseFile=images-license.txt
+InfoBeforeFile=info-to-show-in-installer.txt
 OutputDir=output
 Compression=none
 SourceDir=".\"
