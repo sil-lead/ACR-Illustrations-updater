@@ -5,7 +5,7 @@ unless ($^O eq "MSWin32") {
 
 # make sure the index.txt file has a return at the end
 my $baseindexloc = "/ProgramData/SIL/ImageCollections/Afghan Children Read/index.txt";
-open (my $basefh, "<", $baseindexloc) || die $0;
+open (my $basefh, "<", $baseindexloc) || die "Please install the ACR Illustrations collection before running this script.\n";
 my @index;
 while (<$basefh>) {
 	chomp;
