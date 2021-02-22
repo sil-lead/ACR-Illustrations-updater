@@ -1,17 +1,18 @@
 This repository is a starting point for updating the _Afghan Children Reading Illustrations_ image collection. It includes:
 
 * a sample collection with a multilingual index
-* a windows batch file that
+* a Perl script file that
     * converts all images to highly compressed png's
     * embeds intellectual property information in each image
     * optionally adds a prefix to each image file
+* a Perl script that imports existing index entries and adds new index entries to it
 * an installer setup
 
 You should be comfortable installing software and using the Windows **CMD** command prompt.
 
 Note: If you want to create an installer for a new image collection, see [sillsdev/image-collection-starter](https://github.com/sillsdev/image-collection-starter).
 
-# 1) Clone this repository into your own github account.
+# 1) Clone this repository
 
 Click the green **Copy** button and select **Download ZIP**. Then unzip the files that have been downloaded.
 
@@ -107,7 +108,7 @@ Copy the images you want to add to the _ACR Illustrations_ into the `/ACR-images
 
 We need an automated process that will take each image in the `ACR-images/` directory, get it all ready, and put it in the `/ACR-output/processed-images` directory. This is what the `ACR-process-images.pl` does. Run it by typing:
 ```
-perl ACR-process-images.pl
+perl process-images.pl
 ```
 For each image in `ACR-images/`, `ACR-process-images.pl` file:
 * makes a PNG out of it in `/ACR-output/processed-images` using ImageMagick (but not if the image is a jpg file, which should not be converted to PNG)
@@ -149,7 +150,7 @@ Here are some things to be careful about:
 
 Run the following command:
 ```
-perl ACR-clean-index.pl
+perl clean-index.pl
 ```
 This script fetches the index from the _Afghan Children Reading_ collection that is already installed on the computer and adds the contents of your new `index.txt` to it.
 
