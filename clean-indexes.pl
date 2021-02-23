@@ -25,6 +25,7 @@ while (<$fh>) {
 }
 close $fh;
 
+# make sure there are no duplicate filenames
 my @jndex;
 push @jndex, shift (@index);
 my @filtered = uniq(@index);
@@ -36,6 +37,20 @@ for my $i (@jndex) {
 close $fh;
 
 sub uniq {
-	my %seen = ();
-	my @unique = grep { ! $seen{ $_ }++ } @_;
+	my (@unique, %seen);
+	for my $elem (@_) {
+		my @line = split("\t", $elem);
+		my $key = join("\t", @line[0..1]);
+		unless ($seen{$key}) {
+			push @unique, $elem;
+			$seen{$key}++;
+		} else {
+			print "The index has a duplicate file: \n";
+			print "  subfolder: $line[1]\n";
+			print "  filename:  $line[0]\n";
+			print "Please fix the filnames and run this script again\n";
+			die;
+		}
+	}
+	return @unique;
 }
