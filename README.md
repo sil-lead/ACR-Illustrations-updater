@@ -111,13 +111,13 @@ Copy the images you want to add to the _ACR Illustrations_ into the `ACR-images`
 
 # 6) Process your images
 
-We need an automated process that will take each image in the `ACR-images` directory, get it all ready, and put it in the `ACR-output\processed-images` directory. This is what the `ACR-process-images.pl` does. Run it by typing:
+We need an automated process that will take each image in the `images` directory, get it all ready, and put it in the `output\processed-images` directory. This is what the `process-images.pl` does. Run it by typing:
 ```
 perl process-images.pl
 ```
-For each image in `ACR-images`, `ACR-process-images.pl` does the following:
+For each image in `images`, `process-images.pl` does the following:
 
-* makes a png and places the new image in `/ACR-output/processed-images` using ImageMagick (unless the image is a jpg file -- jpgs are not converted to png)
+* makes a png and places the new image in `output\processed-images\` using ImageMagick (unless the image is a jpg file -- jpgs are not converted to png)
 * compresses the png file using pngut
 * pushes in metadata using ExifTool
 
@@ -133,7 +133,7 @@ The index is a tab-delimited, Unicode (UTF-8) text file. The first row is a head
 
     filename **(tab)** subfolder **(tab)** ps **(tab)** prs **(tab)** en
 
-where _ps_ is Pashto and _prs_ is Dari. (But don't put spaces on either side of the tabs -- those are only there to make it more readable.) (Note: ACR Bloom books in Pashto use **pbt** [Southern Pashto](#https://iso639-3.sil.org/code/pbt) as the language code for Pashto. It's OK for `index.txt` to use the generic Pashto language code **ps**.)
+where _ps_ is Pashto and _prs_ is Dari. (But don't put spaces on either side of the tabs -- those are only there to make it more readable. Also, ACR's Bloom books in Pashto use **pbt** [Southern Pashto](#https://iso639-3.sil.org/code/pbt) as the language code for Pashto, while `index.txt` uses the generic Pashto language code **ps**. It's OK that they're different.)
 
 Following the header row, the index needs a row for each image in the collection. Within a column of index terms for a language, terms are separated by commas. For example, this row is for a file named "image315.png". (It could end in ".tif", ".png", or any other filename extension -- the index doesn't care.) It is in a subfolder named "Actions".
 ```
