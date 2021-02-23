@@ -10,11 +10,11 @@ This repository is a starting point for updating the _Afghan Children Reading Il
 
 You should be comfortable installing software and using the Windows **CMD** command prompt.
 
-Note: If you want to create an installer for a new image collection, see [sillsdev/image-collection-starter](https://github.com/sillsdev/image-collection-starter).
+_Note: If you want to create an installer for a new image collection, see [sillsdev/image-collection-starter](https://github.com/sillsdev/image-collection-starter)._
 
 # 1) Clone this repository
 
-Click the green **Copy** button and select **Download ZIP**. Then unzip the files that have been downloaded.
+Click the green **Copy** button and select **Download ZIP**. Then unzip the downloaded file. (The folder will be named `acr=illustrations-updater-master`.) 
 
 # 2) Launch CMD and set the PATH
 
@@ -22,9 +22,9 @@ To launch the Windows CMD prompt, press the Windows key and type `cmd`.
 
 This folder (where this `README` and `ACR-process-images.pl` are) must be in the PATH environment variable. To quickly add the current folder to the PATH, you can type:
 ```
-set PATH="%PATH%;C:\path\to\this\folder"
+set PATH="%PATH%;C:\path\to\acr-illustrations-updater-master"
 ```
-or navigate to the folder and type:
+or use the `cd` command to navigate to the `acr-illustrations-updater-master` folder and type:
 ```
 set PATH="%PATH%;."
 ```
@@ -36,16 +36,16 @@ You will need a number of helper programs: [ExifTool](#3a-exiftool), [ImageMagic
 
 ## 3a. ExifTool
 
-**ExifTool** is used to embed your intellectual property information into each image. Get it at http://www.sno.phy.queensu.ca/~phil/exiftool/ and install it. It does not have an actual installer, so here are some steps:
+**ExifTool** is used to embed your intellectual property information into each image. Get it at http://www.sno.phy.queensu.ca/~phil/exiftool/ and install it. 
 
-1. Download the "Windows executable" and unzip it into this folder, alongside the file named `process-images.pl`.
+1. Download the "Windows executable" and unzip it into the `acr-illustrations-updater-master` folder.
 2. Rename it from `exiftool(-k).exe` to just `exiftool.exe`.
 
-Verify that if you open a new CMD window and `cd` to this folder, this command works:
+Verify that if you open a new CMD window and `cd` to the `acr-illustrations-updater-master` folder, this command works:
 ```
 exiftool -ver
 ```
-You should see something like
+You should see something like:
 ```
 11.72
 ```
@@ -53,21 +53,21 @@ You should see something like
 
 ## 3b. ImageMagick
 
-**ImageMagick** can be used to convert your images to PNG. Get it at http://www.imagemagick.org/script/download.php. Get the first choice under "Windows Binary Release". Run the installer and verify that if you open a new CMD window, this command works:
+**ImageMagick** can be used to convert your images to PNG. Get it at http://www.imagemagick.org/script/download.php. Download the first choice under "Windows Binary Release". Run the installer and verify that if you open a new CMD window, this command works:
 ```
 magick --version
 ```
-You should see something like
+You should see something like:
 ```
 Version: ImageMagick 7.0.7-1 Q16 x64 2017-09-09 http://www.imagemagick.org
 Copyright: Copyright (C) 1999-2015 ImageMagick Studio LLC
 ```
 
-(**Note:** jpeg photographs or very complicated color drawings that include lots of shading are better not being automatically converted to the png format. If you have such images, it is better to experiment with different ImageMagick compression settings to find which settings give the best results in terms of size and image quality. Then you can convert your jpg files to png files before running the `process-images.pl` script (below).)
+(**Note:** If you have jpeg photographs or very complicated color drawings that include lots of shading, it is better not to automatically convert them to the png format. If you have such images, you can experiment with different ImageMagick compression settings to find which settings give the best results for size and image quality. Then you can convert your jpg files to png files before running [`process-images.pl`](#6-process-your-images).)
 
 ## 3c. pngout
 
-**pngout** is used to compress PNG files. Get it here: http://advsys.net/ken/utils.htm. Like ExifTool, pngout lacks an installer. Put the file named `pngout.exe` in this folder, alongside the file named `process-images.pl` (or anywhere else on your Windows PATH). Type following command in a CMD window while cd'd into this folder:
+**pngout** is used to compress PNG files. Get it here: http://advsys.net/ken/utils.htm. Like ExifTool, pngout lacks an installer. Put the file named `pngout.exe` in the `acr-illustrations-updater-master` folder (or anywhere else on your Windows PATH). Type the following command in a CMD window:
 ```
 pngout
 ```
@@ -89,23 +89,23 @@ This is perl 5, version 32, subversion 1 (v5.32.1) built for MSWin32-x64-multi-t
 
 # 4) See if you can create the Sample Collection
 
-Before customizing anything, test out your setup by creating the sample collection. Open a **CMD** command prompt window, `cd` to this folder, and run:
+Before customizing anything, test out your setup by creating the sample collection. Open a **CMD** command prompt window, `cd` to the `acr-illustrations-updater-master` folder, and run:
 ```
 test-process-images.pl
 ```
 That should create a `test-output` folder containing an image of a green star a `test-processed-images` subfolder containing two images of rectangles.
 
-Now make an installer. Double click the `test-installer.iss` file. **InnoSetup** should run. Click `Build:Compile`. That should create `/test-output/Shapes Collection 1.0.exe`. 
+Now make an installer by double clicking the **test-installer.iss** file. InnoSetup should run. Click **Build:Compile**. That should create a `Shapes Collection 1.0.exe` in the `test-output\` folder. 
 
-Next, run the `/test-output/Shapes Collection 1.0.exe` program. 
+Next, run the **Shapes Collection 1.0.exe** program. 
 
-When it is done, look in `%programdata%\SIL\ImageCollections\` (which is probably `C:\ProgramData\SIL\ImageCollections` on your computer; since `C:\ProgramData\` is usually hidden, you may need to use the "Show hidden files" in Windows File Explorer to find it). You should see a folder called `Shapes`. You can also fire up Bloom and open an Image Toolbox window, and search for "star". (Make sure that there is a checkbox next to "Shapes" in the "Galleries" drop-down list.) You should see the green star. 
+When it is done, look in the `%programdata%\SIL\ImageCollections\` folder (which is probably `C:\ProgramData\SIL\ImageCollections` on your computer. `C:\ProgramData\` is usually hidden, so you may need to use the "Show hidden files" control in File Explorer to find it). You should see a folder called `Shapes`. You can also launch Bloom and open an Image Toolbox window, and search for "star". (Make sure that there is a checkbox next to "Shapes" in the "Galleries" drop-down list.) You should see the green star. 
 
-After you have verified that the `Shapes` folder is in the `C:\ProgramData\SIL\ImageCollections` folder, you can run the `unins000.exe` program in that folder. This will remove the `Shapes` image gallery from your computer.)
+(After you have verified that the `Shapes` folder is in the `C:\ProgramData\SIL\ImageCollections` folder, you can run the **unins000.exe** program in that folder. This will remove the `Shapes` image gallery from your computer.)
 
 # 5) Set up your image files
 
-Copy the images you want to add to the _ACR Illustrations_ into the `ACR-images` folder. `ACR-images` has a set of subfolders to match the ACR Illustrations categories (Actions, Animals, Food, FromBooks, Miscellaneous, Objects, People). If you want to add an image to an existing _ACR Illustrations_ sub-folder, put it in the appropriate sub-folder (for instance, _People\new-image.png_).
+Copy the images you want to add to  _ACR Illustrations_ into the `images` folder. `images` has a set of subfolders to match the ACR Illustrations categories (Actions, Animals, Food, FromBooks, Miscellaneous, Objects, People). You can add an image to one of these subfolders (for instance, _People\new-image.png_). 
 
 **IMPORTANT:** Be sure the names of your new image files are not the same as the names of any existing _ACR Illustrations_ images.
 
@@ -115,7 +115,7 @@ We need an automated process that will take each image in the `images` directory
 ```
 perl process-images.pl
 ```
-For each image in `images`, `process-images.pl` does the following:
+For each image in `images`, `process-images.pl`...
 
 * makes a png and places the new image in `output\processed-images\` using ImageMagick (unless the image is a jpg file -- jpgs are not converted to png)
 * compresses the png file using pngut
@@ -143,13 +143,9 @@ image315.png (tab) Actions (tab) زده کونکی,پشی,تلل,عملونه (t
 
 Here are some things to be careful about:
 
-* An easy mistake to make when creating index.txt is to lose the Unicode (UTF-8) formatting. For example, you might create the index in a spreadsheet program, then export as "tab delimited text". If you do this, make sure you to create a Unicode (UTF-8) document, otherwise any non-Western character will be changed to a question mark.  
-
-  In Microsoft Excel, use Save as... > and choose **Unicode text (*.txt)** as the file format. Doing this may introduce unwanted quotation marks around each set of tags, however.  
-
-  The safest way to move your index data from a spreadsheet program is to copy and paste it into a text editor such as Notepad or Visual Code. This lets you more easily control the file encoding.
-* Be sure that any commas that separate search terms are Western commas (**,**, U+002C), not Arabic commas (**،**, U+060C). If you have Arabic commas in your search terms, Bloom will not recognize them as separate search terms.
-* Be sure that no file is listed twice -- this will cause an error in Bloom. One way to check for duplicates is to turn on "conditional formatting" in your spreadsheet program, with the condition "duplicate".
+* An easy mistake to make when creating index.txt is to lose the Unicode (UTF-8) formatting. If you create the index in a spreadsheet programT, the safest way to move your index data from a spreadsheet program is to copy and paste it into a text editor such as Notepad or Visual Code. This lets you more easily control the file encoding. 
+* Be sure that any commas that separate search terms are Western commas (< , > U+002C) rather than Arabic commas (< ، >, U+060C). 
+* Be sure that no file is listed twice -- this will cause an error in Bloom. One way to check for duplicates is to turn on "conditional formatting" in your spreadsheet program, with the condition "duplicate". The [`clean-index.pl`](#6b-prepare-the-index-for-use) script helps you with this by silently removing any duplicate filenames in the index. 
 * It is good practice to put the name of the subfolder at the end of the search strings (in the above example, Pashto عملونه, Dari اعمال, English _actions_).
 
 ## 6b) Prepare the index for use
@@ -158,21 +154,21 @@ Run the following command:
 ```
 perl clean-index.pl
 ```
-This script fetches the index from the _Afghan Children Reading Illustrations_ collection that is already installed on the computer and adds the contents of your new `index.txt` to it. If the _ACR Illustrations_ collection is not installed (to be specific, if it is not installed in `C:\ProgramData\SIL\ImageCollections\Afghan Children Read`), the script will give an error message and stop.
+This script fetches the index from the _Afghan Children Reading Illustrations_ collection that is already installed on the computer and adds the contents of your new `index.txt` to it. If the _ACR Illustrations_ collection is not installed (specifically, if there is no  `C:\ProgramData\SIL\ImageCollections\Afghan Children Read\index.txt` already present), the script will give an error message and stop.
 
 # 7) Make the installer
 
-Double click the `ACR-installer.iss` file. **Innosetup** should open.
+Double click the **ACR-installer.iss** file. **Innosetup** should open.
 
-You can change the AppVersion to reflect updates to _ACR Illustrations_. Do not edit any of the other values. 
+You can edit the AppVersion value to reflect updates to _ACR Illustrations_. Do not edit any of the other values. 
 
 **IMPORTANT:** Do not change the AppId GUID. If you do, you will create a second _ACR Illustrations_ collection on the user's computer.
 
-Click **Build:Compile**. That should create `/ACR-output/Install ACR Illustrations.exe`.
+Click **Build:Compile**. That should create `Install ACR Illustrations-VERSION_NUMBER.exe` in the `output` folder.
 
 # 8) Run the installer
 
-Double click the `Install ACR Illustrations.exe` file to install the new illustrations. When it is done, look in `%programdta%\SIL\ImageCollections\`. You should see your collection. Finally, run Bloom and search for one of your images.
+Double click the **Install ACR Illustrations-VERSION_NUMBER.exe** file to install the new illustrations. When it is done, look in the `%programdta%\SIL\ImageCollections` folder. You should see your collection. Finally, run Bloom and search for one of your images.
 
 # Background information: File locations
 
